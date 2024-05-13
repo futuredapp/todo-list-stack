@@ -1,0 +1,31 @@
+volumes:
+  todo-list-data:
+
+services:
+  mongo:
+    image: mongo:7
+    ports:
+      - '27017:27017'
+    volumes:
+      - todo-list-data:/data/db
+
+  api:
+    depends_on:
+      - mongo
+    build:
+      context: ./api
+      dockerfile: dev.Dockerfile
+    ports:
+      - '8080:80'
+    environment:
+      NODE_ENV: development
+      APP_ENV: local
+      LOG_LEVEL: debug
+      PORT: 80
+      TZ: UTC
+      DATABASE_URL: mongodb://mongo/todo-list
+    volumes:
+      - ./api/app/src:/app/src:cached
+      - ./api/app/schema.gql:/app/schema.gql
+      - ./api/app/package.json:/app/package.json
+      - ./api/app/tsconfig.json:/app/tsconfig.json

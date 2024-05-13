@@ -1,0 +1,28 @@
+overwrite: true
+schema: http://localhost:8080/graphql
+
+documents: 'src/graphql/**/*.gql'
+generates:
+  ./src/graphql/index.ts:
+    plugins:
+      - typescript
+      - typescript-operations
+      - typescript-vue-apollo
+    config:
+      vueCompositionApiImportFrom: vue
+      scalars: 'src/graphql/scalars'
+      typesPrefix: I
+      maybeValue: T
+      inputMaybeValue: 'T | null | undefined'
+      nonOptionalTypename: true
+      strictScalars: true
+  ./src/graphql/graphql.introspection.json:
+    plugins:
+      - introspection
+    config:
+      module: es2015
+  ./src/graphql/graphql.possibleTypes.json:
+    plugins:
+      - fragment-matcher
+    config:
+      module: es2015
