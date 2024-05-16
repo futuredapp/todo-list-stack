@@ -2,6 +2,23 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
+type Mutation {
+  createTask(input: TaskCreateInput!): Todo!
+  deleteTask(id: ID!): Boolean
+  toggleCompleted(id: ID!): Todo
+}
+
 type Query {
-  hello: String!
+  task(id: ID!): Todo
+  tasks: [Todo]!
+}
+
+input TaskCreateInput {
+  content: String!
+}
+
+type Todo {
+  completed: Boolean!
+  content: String!
+  id: ID!
 }

@@ -1,3 +1,33 @@
-query Hello {
-  hello
+query Tasks {
+  tasks {
+    id
+    content
+    completed
+  }
+}
+
+query Task($id: ID!) {
+  task (id: $id) {
+    id
+    content
+    completed
+  }
+} 
+
+mutation CreateTask($input: TaskCreateInput!) {
+  createTask (input: $input) {
+    id
+    content
+    completed
+  }
+}
+
+mutation DeleteTask($id: ID!) {
+  deleteTask (id: $id)
+}
+
+mutation ToggleCompleted($id: ID!) {
+  toggleCompleted (id: $id) {
+    id
+  }
 }
