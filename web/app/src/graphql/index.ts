@@ -1,6 +1,3 @@
-import { ID } from 'src/graphql/scalars';
-import { String } from 'src/graphql/scalars';
-import { Boolean } from 'src/graphql/scalars';
 import gql from 'graphql-tag';
 import * as VueApolloComposable from '@vue/apollo-composable';
 import * as VueCompositionApi from 'vue';
@@ -14,9 +11,9 @@ export type Incremental<T> = T | { [P in keyof T]?: P extends ' $fragmentName' |
 export type ReactiveFunction<TParam> = () => TParam;
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
-  ID: { input: ID['input']; output: ID['output']; }
-  String: { input: String['input']; output: String['output']; }
-  Boolean: { input: Boolean['input']; output: Boolean['output']; }
+  ID: { input: string; output: string; }
+  String: { input: string; output: string; }
+  Boolean: { input: boolean; output: boolean; }
   Int: { input: number; output: number; }
   Float: { input: number; output: number; }
 };
@@ -68,35 +65,35 @@ export type ITodo = {
 export type ITasksQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type ITasksQuery = { __typename: 'Query', tasks: Array<{ __typename: 'Todo', id: ID['output'], content: String['output'], completed: Boolean['output'] }> };
+export type ITasksQuery = { __typename: 'Query', tasks: Array<{ __typename: 'Todo', id: string, content: string, completed: boolean }> };
 
 export type ITaskQueryVariables = Exact<{
   id: Scalars['ID']['input'];
 }>;
 
 
-export type ITaskQuery = { __typename: 'Query', task?: { __typename: 'Todo', id: ID['output'], content: String['output'], completed: Boolean['output'] } };
+export type ITaskQuery = { __typename: 'Query', task?: { __typename: 'Todo', id: string, content: string, completed: boolean } };
 
 export type ICreateTaskMutationVariables = Exact<{
   input: ITaskCreateInput;
 }>;
 
 
-export type ICreateTaskMutation = { __typename: 'Mutation', createTask: { __typename: 'Todo', id: ID['output'], content: String['output'], completed: Boolean['output'] } };
+export type ICreateTaskMutation = { __typename: 'Mutation', createTask: { __typename: 'Todo', id: string, content: string, completed: boolean } };
 
 export type IDeleteTaskMutationVariables = Exact<{
   id: Scalars['ID']['input'];
 }>;
 
 
-export type IDeleteTaskMutation = { __typename: 'Mutation', deleteTask?: Boolean['output'] };
+export type IDeleteTaskMutation = { __typename: 'Mutation', deleteTask?: boolean };
 
 export type IToggleCompletedMutationVariables = Exact<{
   id: Scalars['ID']['input'];
 }>;
 
 
-export type IToggleCompletedMutation = { __typename: 'Mutation', toggleCompleted?: { __typename: 'Todo', id: ID['output'] } };
+export type IToggleCompletedMutation = { __typename: 'Mutation', toggleCompleted?: { __typename: 'Todo', id: string } };
 
 
 export const TasksDocument = gql`

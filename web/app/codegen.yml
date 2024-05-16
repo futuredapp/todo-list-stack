@@ -10,12 +10,12 @@ generates:
       - typescript-vue-apollo
     config:
       vueCompositionApiImportFrom: vue
-      scalars: 'src/graphql/scalars'
       typesPrefix: I
       maybeValue: T
       inputMaybeValue: 'T | null | undefined'
       nonOptionalTypename: true
-      strictScalars: true
+      scalars:
+        Date: Date
   ./src/graphql/graphql.introspection.json:
     plugins:
       - introspection
